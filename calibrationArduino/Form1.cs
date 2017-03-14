@@ -28,12 +28,16 @@ namespace calibrationArduino
         private string[] _range;
         private string _textFromBoard;
         private string _portNo = "1113";
-
+        private string[] _rangeA;
+        private string[] _rangeB;
+        private string[] _rangeC;
+        private string[] _rangeD;
+        private string[] _rangeE;
         public Form1()
         {
             InitializeComponent();
             addLabel();
-            
+
         }
 
         public void serverThread()
@@ -75,11 +79,11 @@ namespace calibrationArduino
 
         private void A_CheckedChanged(object sender, EventArgs e)
         {
-            if (A.Checked)      setVisible("A", true);
-            else                setVisible("A", false);
+            if (A.Checked) setVisible("A", true);
+            else setVisible("A", false);
         }
 
-        private void setVisible(string device,bool status)
+        private void setVisible(string device, bool status)
         {
             int count;
 
@@ -160,8 +164,8 @@ namespace calibrationArduino
 
             for (count = 1; count <= 5; count++)
             {
-                _device[count] = word[2*count-2];
-                _range[count] = word[2*count-1];
+                _device[count] = word[2 * count - 2];
+                _range[count] = word[2 * count - 1];
             }
 
         }
@@ -212,8 +216,59 @@ namespace calibrationArduino
         private void pButton_Click(object sender, EventArgs e)
         {
             click--;
-            if (click == 1)         pButton.Visible = false;
-            
+            if (click == 1) pButton.Visible = false;
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (A.Checked == true)
+            {
+                updateRange(_rangeA,1);
+            }
+            if (B.Checked == true)
+            {
+                 updateRange(_rangeB,2);
+            }
+            if (C.Checked == true)
+            {
+                updateRange(_rangeC, 3);
+            }
+            if (D.Checked == true)
+            {
+                updateRange(_rangeD, 4);
+            }
+            if (E.Checked == true)
+            {
+                updateRange(_rangeE, 5);
+            }
+        }
+        private void updateRange(string[] range, int productId)
+        {
+            string query = "update Range set range1 = @range1,range2 = @range2,range3 = @range3,range4 = @range4,range5 = @range5 where productId = @productId";
+            string range1 = string.Empty;
+            string range2 = range[2].ToString();
+            string range3 = range[3].ToString();
+            string range4 = range[4].ToString();
+            string range5 = range[5].ToString();
+            range1 = range[1].ToString();
+            range2 = range[2].ToString();
+            range3 = range[3].ToString();
+            range4 = range[4].ToString();
+            range5 = range[5].ToString();
+            using (DataAccess dac = new DataAccess())
+            {
+                dac.Open(Provider.MSSQL);
+                DbCommand cmd = dac.CreateCommand(query);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(dac.CreateParameter("@range1", range1));
+                cmd.Parameters.Add(dac.CreateParameter("@range2", range2));
+                cmd.Parameters.Add(dac.CreateParameter("@range3", range3));
+                cmd.Parameters.Add(dac.CreateParameter("@range4", range4));
+                cmd.Parameters.Add(dac.CreateParameter("@range5", range5));
+                cmd.Parameters.Add(dac.CreateParameter("@productId", productId));
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

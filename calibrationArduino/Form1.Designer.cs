@@ -68,6 +68,7 @@
             this.lE1 = new System.Windows.Forms.Label();
             this.startButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,7 +188,7 @@
             // 
             // pButton
             // 
-            this.pButton.Location = new System.Drawing.Point(339, 292);
+            this.pButton.Location = new System.Drawing.Point(188, 292);
             this.pButton.Name = "pButton";
             this.pButton.Size = new System.Drawing.Size(75, 23);
             this.pButton.TabIndex = 6;
@@ -197,7 +198,7 @@
             // 
             // nButton
             // 
-            this.nButton.Location = new System.Drawing.Point(430, 292);
+            this.nButton.Location = new System.Drawing.Point(279, 292);
             this.nButton.Name = "nButton";
             this.nButton.Size = new System.Drawing.Size(75, 23);
             this.nButton.TabIndex = 7;
@@ -450,11 +451,22 @@
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(380, 292);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 35;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 327);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.lE5);
@@ -541,6 +553,7 @@
         private System.Windows.Forms.Label lE1;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
 
